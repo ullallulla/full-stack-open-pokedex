@@ -24,6 +24,6 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: contains skip message
         env:
-            COMMIT_INCLUDES_SKIP: ${{toJson(contains(github.event.commits.*.message, '#skip'))}}
+            COMMIT_WITH_JOIN: ${{toJson(join(github.event.commits.*.message))}}
         run:
-            echo "$COMMIT_INCLUDES_SKIP"
+            echo "$COMMIT_WITH_JOIN"
