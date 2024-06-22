@@ -30,8 +30,13 @@ jobs:
             - run: npm run test:e2e
     tag_release:
         needs: [simple_deployment_pipeline]
+        permissions:
+            contents: write
         runs-on: ubuntu-20.04
         steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: '0'
             - name: Bump version and push tag
               if: ${{ github.event_name == 'push' }}
               uses: anothrNick/github-tag-action@v1
