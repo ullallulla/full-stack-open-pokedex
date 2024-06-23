@@ -42,7 +42,7 @@ jobs:
               with:
                   severity: error
                   description: Build Failed!
-                  details: ${{ github.event.head_commit }}
+                  details: ${{ github.event.head_commit.url }}
                   webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: Build Cancelled
               uses: rjstone/discord-webhook-notify@v1
