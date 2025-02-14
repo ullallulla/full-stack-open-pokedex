@@ -66,6 +66,7 @@ jobs:
                 title: "Build Succeeded!"
                 description: |
                   A new version has been deployed.
+                  [https://full-stack-open-pokedex-late-waterfall-1284.fly.dev/]
                 color: 0x00FF00
     tag_release:
         needs: [simple_deployment_pipeline]
