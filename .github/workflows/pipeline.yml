@@ -58,10 +58,15 @@ jobs:
             #       DISCORD_WEBHOOK_URL: ${{secrets.DISCORD_WEBHOOK}}
             #       GITHUB_JOB_NAME: "Build success"
             #       GITHUB_JOB_STATUS: ${{ job.status }}
-            - name: github context
-              env:
-                GITHUB_CONTEXT: ${{ toJson(github) }}
-              run: echo "$GITHUB_CONTEXT"
+            - uses: sarisia/actions-status-discord@v1
+              if: ${{success()}}
+              with:
+                webhook: ${{ secrets.DISCORD_WEBHOOK }}
+                nodetail: true
+                title: "Build Succeeded!"
+                description: |
+                  A new version has been deployed.
+                color: 0x00FF00
     tag_release:
         needs: [simple_deployment_pipeline]
         permissions:
