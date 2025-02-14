@@ -51,13 +51,17 @@ jobs:
             #       severity: warn
             #       details: Build Cancelled!
             #       webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-            - name: Build Success
-              uses: th0th/notify-discord@v0.4.1
-              if: ${{success()}}
+            # - name: Build Success
+            #   uses: th0th/notify-discord@v0.4.1
+            #   if: ${{success()}}
+            #   env:
+            #       DISCORD_WEBHOOK_URL: ${{secrets.DISCORD_WEBHOOK}}
+            #       GITHUB_JOB_NAME: "Build success"
+            #       GITHUB_JOB_STATUS: ${{ job.status }}
+            - name: github context
               env:
-                  DISCORD_WEBHOOK_URL: ${{secrets.DISCORD_WEBHOOK}}
-                  GITHUB_JOB_NAME: "Build success"
-                  GITHUB_JOB_STATUS: ${{ job.status }}
+                GITHUB_CONTEXT: ${{ toJson(github) }}
+              run: echo "$GITHUB_CONTEXT"
     tag_release:
         needs: [simple_deployment_pipeline]
         permissions:
